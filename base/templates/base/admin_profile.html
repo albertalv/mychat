@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {%block content%}
+    <h1>Este es el perfil del admin</h1>
+
+    <h2>Bienvenido admin {{user.username}} </h2>
+    <button id="botonSiete">VERIFICAR CUENTA</button>
+    <button id="botonOcho">RESOLVER DENUNCIA</button>
+    <button id="botonNueve">CATEGORIAS</button>
+          <table>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="border: 1px solid black;" id="contenedor">
+                      
+                    </div>
+                  </td>
+            </tr>
+          </table>
+          
+          <script type="text/javascript" src="{% static 'js/pruebaFetchDos.js' %}" ></script>
+    {%endblock%}
+    
+    
+</html>

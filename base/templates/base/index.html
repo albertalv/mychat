@@ -1,0 +1,17 @@
+{%extends 'base/base.html'%}
+
+{% load static%}
+{%block content%}
+
+<h2>Este es el index de la pagina</h2>
+<h3>Aqui estan los canales activos</h3>
+<div id="contenedor"></div>
+{% for stream in streams %}
+    <p>{{ stream.uid }}</p>
+    <p>{{ stream.token }}</p>
+    <p>{{ stream.channel }}</p>
+    <p>{{ stream.appId }}</p>
+{% endfor %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+{%endblock%}

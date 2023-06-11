@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {%block content%}
+    <h1>Este es el perfil de usuario</h1>
+    <p>muestra algo mas</p>
+    <h2>Bienvenido {{user.username}} </h2>
+    <button id="boton">TUS CANALES</button>
+    <button id="botonTres">TU INFORMACION</button>
+    <button id="botonCuatro">TUS TOKENS</button>
+    <button id="botonCinco">TU DINERO</button>
+    <button id="botonSeis">BUZON</button>
+    <a href={% url 'lobby' %} class="button-link">Iniciar transmisión</a>
+
+          <table>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="border: 1px solid black;" id="contenedor">
+                      
+                    </div>
+                  </td>
+            </tr>
+          </table>
+          
+          <script type="text/javascript" src="{% static 'js/pruebaFetchUno.js' %}" ></script>
+         
+    {%endblock%}
+    
+    
+</html>
+
