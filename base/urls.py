@@ -24,5 +24,5 @@ urlpatterns= [
     path('tokens/', views.tokens, name="tokens"),
     path('nosotros/', views.nosotros, name="nosotros"),
     path('categorias/', views.categorias, name="categorias"),
-    path('actualizar_estado_canal/', views.actualizar_estado_canal, name='actualizar_estado_canal'),
+    
 ]

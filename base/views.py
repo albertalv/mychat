@@ -1,15 +1,14 @@
 from django.shortcuts import render,redirect
 from agora_token_builder import RtcTokenBuilder
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout, login, authenticate
 from django.http import JsonResponse
 from .forms import LoginForm
 from .forms import CustomUserCreationForm
 from .models import Stream
-from .models import Estatus
 import random
 import time 
+connected = False
 # Create your views here.
 def getToken(request):
     appId = "380a5ca3bd4f4cd09bd565211dd8aa02"
@@ -39,7 +38,7 @@ def pruebaDos(request):
     return render(request, 'base/contenidoDos.html')
 def inicio(request):
     streams = Stream.objects.all()
-    return render(request, 'base/index.html', {'streams': streams})
+    return render(request, 'base/index.html', {'streams': streams, 'connected': connected})
 @login_required
 def profile(request):
     return render(request,'base/profile.html')
@@ -125,17 +124,4 @@ def nosotros(request):
     return render(request, 'base/nosotros.html')
 def categorias(request):
     return render(request, 'base/categorias.html')
-from django.http import JsonResponse
 
-@csrf_exempt
-def actualizar_estado_canal(request):
-    if request.method == 'POST':
-        channel = request.POST.get('channel')
-        estado = request.POST.get('estado')
-        
-        # Aquí debes insertar un nuevo registro en lugar de obtener uno existente
-        estatus = Estatus.objects.create(channel=channel, estado=estado)
-        
-        return JsonResponse({'mensaje': 'Estado del canal actualizado'})
-    else:
-        return JsonResponse({'mensaje': 'Método no permitido'})
