@@ -6,14 +6,28 @@
 <h2>Este es el index de la pagina</h2>
 <h3>Aqui estan los canales activos</h3>
 <div id="contenedor"></div>
-{% for stream in streams %}
-    <p>{{ stream.uid }}</p>
-    <p>{{ stream.token }}</p>
-    <p>{{ stream.channel }}</p>
-    <p>{{ stream.appId }}</p>
-{% endfor %}
-<p id="status"></p>
 
+
+<p id="status"></p>
+<form id="form">
+       
+    
+    <div class="field-wrapper">
+        <div class="form-field">
+        <input type="submit" value="Unete al stream" />
+    </div>
+    
+</form>
+<script>
+    let form = document.getElementById('form')
+
+    let handleSubmit = async (e) => {
+        e.preventDefault()    
+        let redirectTo = `/canal/JOSEALV`;
+        window.location.replace(redirectTo);
+    }
+    form.addEventListener('submit', handleSubmit)
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 {%endblock%}

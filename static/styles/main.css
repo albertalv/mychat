@@ -7,8 +7,9 @@
   }
 
 body{
-    background-color: rgba(232,233,239,1);
+    background-color: black;
     font-family: 'Roboto', sans-serif;
+    
 }
 
 
@@ -17,13 +18,14 @@ body{
 #form-container{
     width: 400px;
     box-shadow:var(--shaddow);
-    background-color: #fff;
+    background-color:black;
     padding: 30px;
     border-radius: 5px;
     position: fixed;
     top:50%;
     left:50%;
     transform: translate(-50%, -50%);
+    border-color: #fff;
 }
 
 #logo{
@@ -64,6 +66,9 @@ body{
     padding: 10px;
     font-size: 16px;
     box-sizing: border-box;
+}
+h1, h2{
+    color: white;
 }
 
 .form-field input[type='submit']{

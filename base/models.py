@@ -34,4 +34,4 @@ class Stream(models.Model):
 class Estatus(models.Model):
     # Otros campos del canal
     channel = models.CharField(max_length= 255)
-    estado = models.BooleanField(default=False)
+    estado = models.CharField(max_length= 255) 

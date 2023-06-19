@@ -1,8 +1,9 @@
 from django.urls import path
 from . import views
+from .views import vista
 
 urlpatterns= [
-    path('lobby', views.lobby, name='lobby'),
+    path('lobby/', vista.as_view(), name='lobby'),
     path('room/', views.room, name='cuarto'),
     path('get_token/', views.getToken, name='get_token'),
     path('contenido/', views.contenido, name='contenido'),

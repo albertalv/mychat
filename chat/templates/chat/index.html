@@ -1,61 +1,68 @@
 {% extends 'base/main.html' %}
+{%load static%}
+
 {% load static %}
 {% block content %}
 
-<main>
+    <main>
 
-    <section id="form-container">
-
-        <img id="logo" src="{% static 'images/chat-icon.png' %}"/>
-
-        <div id="welcome-message">
-            <h1>Bienvenido a SKILLS4SKILLS</h1>
-            <p>Una plataforma de streaming hecha justo para ti</p>
-        </div>
-        
-        <form id="form">
-            
-            <div class="field-wrapper">
-
-                <div class="form-field">
-                    <input type="text"name="room" value= "{{user.username}}"/>
-                </div>
-
-
-                <div class="form-field">
-                    <input type="submit" value="Join Stream" />
-                </div>
+        <section id="form-container">
+    
+            <img id="logo" src="{% static 'images/chat-icon.png' %}"/>
+    
+            <div id="welcome-message">
+                <h1>Bienvenido a SKILLS4SKILLS</h1>
+                
+                <h2>Una plataforma de streaming hecha justo para ti</h2>
             </div>
-        </form>
-    </section>
-</main>
+            
+            <form id="form">
+                
+                <div class="field-wrapper">
+    
+                    <div class="form-field">
+                        <input type="text"name="room" value= "{{user.username}}"/>
+                    </div>
+                    <div class="form__field__wrapper">
+                    
+                        <input type="text" name="name" value= "{{user.username}}" />
+                    </div>
+    
+    
+                    <div class="form-field">
+                        <input type="submit" value="Únete al streaming" />
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+
 
 <script>
     let form = document.getElementById('form')
 
-    let handleSubmit = async (e) => {
-        e.preventDefault()
-        let room = e.target.room.value.toUpperCase()
-        let name = e.target.name.value
+let displayName = sessionStorage.getItem('display_name')
 
-        let response = await fetch(`/get_token/?channel=${room}`)
-        let data = await response.json()
+if(displayName){
+    form.name.value = displayName
+}
 
-        let UID = data.uid
-        let token = data.token
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
 
-        sessionStorage.setItem('UID', UID)
-        sessionStorage.setItem('token', token)
-        sessionStorage.setItem('room', room)
-        sessionStorage.setItem('name', name)
-
-        window.location.replace(room);
+    sessionStorage.setItem('display_name', e.target.name.value)
+    let room = e.target.room.value.toUpperCase()
+    let inviteCode = e.target.room.value
+    if(!inviteCode){
+        inviteCode = String(Math.floor(Math.random() * 10000))
     }
-
-
-
-    form.addEventListener('submit', handleSubmit)
+    sessionStorage.setItem('room', room)
+    console.log(room)
+    window.location = room
+})
 </script>
 
-{% endblock content %}
+{%endblock%}
+
+
 

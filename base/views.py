@@ -1,11 +1,18 @@
+from typing import Any
+from django import http
+from django.http import HttpResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render,redirect
 from agora_token_builder import RtcTokenBuilder
+from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login, authenticate
 from django.http import JsonResponse
 from .forms import LoginForm
 from .forms import CustomUserCreationForm
 from .models import Stream
+from .models import Estatus
 import random
 import time 
 connected = False
@@ -24,9 +31,22 @@ def getToken(request):
     stream_obj = Stream(appId= appId, channel = channelName, token = token, uid=uid)
     stream_obj.save()
     return JsonResponse({"token": token, "uid": uid}, safe=False)
-@login_required
-def lobby(request):
-    return render(request,'base/lobby.html')
+
+class vista(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    def get(self, request):
+        return render(request, 'base/lobby.html')
+    
+    def post(self, request): 
+        channel = request.POST.get('channel')
+        estado = request.POST.get('estado')
+        Estatus.objects.filter(channel=channel).delete()
+        objeto = Estatus(channel=channel, estado=estado)
+        objeto.save()
+        return HttpResponse('Operación exitosa')
+
 @login_required
 def room(request):
     return render(request,'base/room.html')
@@ -38,7 +58,10 @@ def pruebaDos(request):
     return render(request, 'base/contenidoDos.html')
 def inicio(request):
     streams = Stream.objects.all()
-    return render(request, 'base/index.html', {'streams': streams, 'connected': connected})
+    estatus = Estatus.objects.all()
+    room_name = streams.first().channel  # Obtener el nombre del canal del primer registro de Stream
+    esHost = request.user.username == room_name.lower()
+    return render(request, 'base/index.html', {'streams': streams, 'estatus': estatus, 'esHost': esHost})
 @login_required
 def profile(request):
     return render(request,'base/profile.html')
