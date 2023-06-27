@@ -1,15 +1,15 @@
 from django.urls import path
 from . import views
-from .views import vista
-
+from .views import vista, vistaCheckout, vistaExitoso, subirVideo, vistaInicio
+from .views import room
 urlpatterns= [
     path('lobby/', vista.as_view(), name='lobby'),
-    path('room/', views.room, name='cuarto'),
+    #path('room/', views.room, name='cuarto'),
     path('get_token/', views.getToken, name='get_token'),
     path('contenido/', views.contenido, name='contenido'),
     path('pruebaUno/', views.pruebaUno, name='pruebaUno'),
     path('contenidoDos/', views.pruebaDos, name='contenidoDos'),
-    path('inicio/', views.inicio, name='inicio'),
+    path('inicio/', vistaInicio.as_view(), name='inicio'),
     path('accounts/profile/', views.profile, name='profile'),
     path('logout/', views.exit, name='exit'),
     path('loginDos/', views.custom_login, name="loginDos"),
@@ -25,5 +25,10 @@ urlpatterns= [
     path('tokens/', views.tokens, name="tokens"),
     path('nosotros/', views.nosotros, name="nosotros"),
     path('categorias/', views.categorias, name="categorias"),
+    path('canal/', views.previo, name='canal'),
+    path('canal/<str:room_name>/', room.as_view(), name='room'),
+    path('checkout/<int:paquete_id>/', vistaCheckout.as_view(), name='checkout'),
+    path('graciasPorTuCompra/', vistaExitoso.as_view(), name ="exitoso"),
+    path('subirVideo/', subirVideo.as_view(), name = 'subirVideo' ), 
     
 ]

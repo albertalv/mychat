@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 INSTALLED_APPS = [
     'daphne',
+    'corsheaders',
     'chat',
     'channels',
     'crispy_forms',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
+    'storages',
     
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -56,11 +58,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
+CORS_ORIGIN_WHITELIST=(
+    'http://localhost:8000',
+)
 ROOT_URLCONF = 'mychat.urls'
 ASGI_APPLICATION = "mychat.asgi.application"
-
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -155,3 +161,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = 'inicio'
 ASGI_APPLICATION = 'mychat.asgi.application'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = 'AKIAUQIPTLA4NKIENKFW'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'pruebaskills'
+AWS_QUERYSTRING_AUTH = False

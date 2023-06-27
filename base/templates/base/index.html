@@ -10,12 +10,18 @@
 
 <p id="status"></p>
 <form id="form">
-       
+    {%for objeto in estatus%}
+        {%if objeto.estado == 'conectado'%}
+        <div class="field-wrapper">
+            <a href="{% url 'room' room_name=objeto.channel %}">
+
+                <button>Unete al stream</button>
+            </a> 
+        </div>
+        {%endif%}
+    {%endfor%}
     
-    <div class="field-wrapper">
-        <div class="form-field">
-        <input type="submit" value="Unete al stream" />
-    </div>
+    
     
 </form>
 <script>
@@ -28,6 +34,6 @@
     }
     form.addEventListener('submit', handleSubmit)
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 {%endblock%}

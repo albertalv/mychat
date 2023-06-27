@@ -5,6 +5,72 @@
 <br>
 <br>
 <h1>AQUI VAN LOS PAQUETES DE TOKENS</h1>
+<style>
+    .paquete {
+      flex-direction: row;
+      color: aliceblue;
+      flex-basis: 33%;
+      text-align: center;
+      border-color: aliceblue;
+      border-style: solid;
+    }
+    .btn-container {
+    display: flex;
+    margin-top: auto; 
+    flex-direction: column;
+    flex-basis: 20%;
+  }
 
+  .contenido{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 80%;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  </style>
+<div id="contenedor" style="background-color: black; height:650px; display: flex;">
+
+    {% for paquete in paquetes %}
+    <div class="paquete">
+        <h2>Paquete 1</h2>
+        <div class="contenido">
+            <h3>{{ paquete.saldo }} tokens por {{ paquete.precio }} pesos</h3>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam reiciendis quibusdam voluptas autem harum voluptatem neque! Pariatur culpa, blanditiis perspiciatis tenetur maxime provident ex fugiat porro vel expedita ratione eveniet quis doloribus esse, repellendus nihil praesentium quidem error laborum deserunt cum voluptatibus voluptatum. Quae provident ullam incidunt molestiae reiciendis obcaecati quibusdam. Rerum libero quis, fugiat deleniti ut temporibus nisi magni. Rerum autem maiores perferendis perspiciatis quia omnis facere similique blanditiis molestias nostrum facilis magni eum, nam molestiae iure quos eligendi, ratione natus saepe aut? Fugit qui obcaecati iste. Suscipit eius aliquam impedit? Consequuntur fugiat eveniet dolorum beatae explicabo, officiis commodi dolores, id magnam soluta et eligendi eos. Sed neque natus hic assumenda, veritatis ratione odit quae cum modi, dicta, itaque dolore vel explicabo ab cumque dolor amet consequatur? Dicta dolorum provident, omnis minus asperiores eaque quod, accusamus magni blanditiis ipsum illum tempora aliquam id aperiam necessitatibus esse, numquam cumque.
+        </div>
+        <div class="btn-container">
+            <a href="{% url 'checkout' paquete.id %}" class="btn btn-outline-primary">Comprar</a>
+        </div>
+    </div>
+{% endfor %}
+
+
+
+
+
+
+<script>
+	document.getElementById("formularioTokens").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+
+    ltokens = parseInt(document.getElementById("tokens").value, 10) // Obtener el valor del campo
+
+    let data = {
+      tokens: tokens
+    };
+    const response = await fetch('/lobby/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (error) {
+    console.log("No se pudo realizar la insercion");
+  }
+});
+</script>
 {% endblock %}
 </html>

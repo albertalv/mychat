@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Aqui van los videos</h2>
+    <div class="video-container" style="display: flex; flex-wrap: wrap;">
+        {% for video in videos %}
+            <video controls style="width: 500px; height: 500px; padding-left: 30px;">
+                <source src="data:video/webm;base64,{{ video }}" type="video/mp4" >
+            </video>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+<form method="POST" action="{% url 'subirVideo' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="video_file">
+    <button type="submit">Subir video</button>
+  </form>
+  

@@ -59,7 +59,7 @@ document.getElementById("boton").addEventListener("click", async () => {
     }
   });
   
-  document.getElementById("botonSiete").addEventListener("click", async () => {
+  /*document.getElementById("botonSiete").addEventListener("click", async () => {
     try {
       const response = await fetch('/validacion/');
       const data = await response.text();
@@ -88,6 +88,18 @@ document.getElementById("boton").addEventListener("click", async () => {
       console.error("Error:", error);
     }
   });
+*/
+  document.getElementById("botonDiez").addEventListener("click", async () => {
+    try {
+      const response = await fetch('/subirVideo/');
+      const data = await response.text();
+      document.getElementById("contenedor").innerHTML = data;
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
+
+
  /* document.getElementById("botonDos").addEventListener("click", async () => {
     try {
       const response = await fetch('/lobby');

@@ -5,7 +5,7 @@ if(!uid){
     uid = String(Math.floor(Math.random() * 10000))
     sessionStorage.setItem('uid', uid)
 }
-
+console.log("hola mundo" + uid)
 let token = null;
 let client;
 
